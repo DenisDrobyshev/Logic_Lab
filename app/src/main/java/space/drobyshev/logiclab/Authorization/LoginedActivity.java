@@ -37,6 +37,7 @@ public class LoginedActivity extends AppCompatActivity {
                     if (checkCredentials == true) {
                         Toast.makeText(LoginedActivity.this, "Успешный вход", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("email","" + email);
                         startActivity(intent);
                     }else{
                         Toast.makeText(LoginedActivity.this, "Похоже у вас нет аккаунта, так зарегистрируйтесь!", Toast.LENGTH_SHORT).show();

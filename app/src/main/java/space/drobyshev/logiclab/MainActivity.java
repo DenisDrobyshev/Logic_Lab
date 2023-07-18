@@ -13,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.get("email").toString();
+
 
         ImageButton person_account = findViewById(R.id.person_account);
         person_account.setOnClickListener(new View.OnClickListener() {
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         main_play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMenuActivity();
+                openMenuActivity(email);
             }
         });
     }
@@ -49,8 +52,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openMenuActivity() {
+    public void openMenuActivity(String email) {
         Intent intent = new Intent(this, MenuActivity.class);
+        intent.putExtra("email","" + email);
         startActivity(intent);
     }
 }

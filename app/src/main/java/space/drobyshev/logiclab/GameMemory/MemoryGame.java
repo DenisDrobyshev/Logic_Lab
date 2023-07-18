@@ -12,11 +12,16 @@ import android.widget.ImageView;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
+import space.drobyshev.logiclab.DBHelper;
+import space.drobyshev.logiclab.MenuActivity;
 import space.drobyshev.logiclab.R;
 
 public class MemoryGame extends AppCompatActivity {
 
+
+    DBHelper DB;
 
     ImageView iv_11, iv_12, iv_13, iv_14, iv_15, iv_16, iv_17, iv_18, iv_19, iv_20, iv_21, iv_22;
     Integer[] cardsArray = {101, 102, 103, 104, 105, 106, 201, 202, 203, 204, 205, 206};
@@ -32,6 +37,15 @@ public class MemoryGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_memory);
+
+        DB = new DBHelper(this);
+
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.get("email").toString();
+
+        List<Boolean> gameResults =DB.getAllGameResultsByEmail(email);
+
+        DB.updateUserGameProgress(email,true, gameResults.get(1),gameResults.get(2),gameResults.get(3),gameResults.get(4));
 
         iv_11 = findViewById(R.id.iv_11);
         iv_12 = findViewById(R.id.iv_12);
@@ -358,5 +372,16 @@ public class MemoryGame extends AppCompatActivity {
         image204 = R.drawable.crab1;
         image205 = R.drawable.hedgehog1;
         image206 = R.drawable.hippopotamus1;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.get("email").toString();
+        intent.putExtra("email","" + email);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

@@ -1,6 +1,7 @@
 package space.drobyshev.logiclab.GameAsteroid;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,11 +10,17 @@ import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
+import space.drobyshev.logiclab.DBHelper;
+import space.drobyshev.logiclab.MenuActivity;
 import space.drobyshev.logiclab.R;
 
 public class GameAsteroidActivity extends AppCompatActivity implements View.OnTouchListener {
     public static boolean isLeftPressed = false; // нажата левая кнопка
     public static boolean isRightPressed = false; // нажата правая кнопка
+
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +33,16 @@ public class GameAsteroidActivity extends AppCompatActivity implements View.OnTo
         Button rightButton = (Button) findViewById(R.id.rightButton);
         leftButton.setOnTouchListener(this); // и добавляем этот класс как слушателя (при нажатии сработает onTouch)
         rightButton.setOnTouchListener(this);
+
+        DB = new DBHelper(this);
+
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.get("email").toString();
+
+        List<Boolean> gameResults =DB.getAllGameResultsByEmail(email);
+
+        DB.updateUserGameProgress(email,gameResults.get(0), gameResults.get(1),gameResults.get(2),true,gameResults.get(4));
+
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -50,5 +67,15 @@ public class GameAsteroidActivity extends AppCompatActivity implements View.OnTo
             }
         }
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.get("email").toString();
+        intent.putExtra("email","" + email);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

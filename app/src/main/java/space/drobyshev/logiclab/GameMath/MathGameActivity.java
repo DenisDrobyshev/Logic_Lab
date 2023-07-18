@@ -13,14 +13,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.sql.Array;
+import java.util.List;
 
+import space.drobyshev.logiclab.DBHelper;
 import space.drobyshev.logiclab.GameMath.MathGame;
 import space.drobyshev.logiclab.MenuActivity;
 import space.drobyshev.logiclab.R;
-import space.drobyshev.logiclab.util.MyPreferencesUtil;
 
 public class MathGameActivity extends AppCompatActivity {
 
+    DBHelper DB;
     Button btn_start, btn_answer0, btn_answer1, btn_answer2, btn_answer3;
     TextView tv_score, tv_questions, tv_timer, tv_botmessage;
     ProgressBar prog_timer;
@@ -60,13 +62,10 @@ public class MathGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_math);
 
-        MyPreferencesUtil.putBooleanValue(this, "GAME1", true);
-        MyPreferencesUtil.putBooleanValue(this, "GAME2", true);
-        MyPreferencesUtil.putBooleanValue(this, "GAME3", true);
-        MyPreferencesUtil.putBooleanValue(this, "Game4", true);
-        MyPreferencesUtil.putBooleanValue(this, "GAME5", true);
+        DB = new DBHelper(this);
 
-
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.get("email").toString();
 
         btn_start = findViewById(R.id.btn_start);
         btn_answer0 = findViewById(R.id.btn_answer0);
@@ -81,11 +80,16 @@ public class MathGameActivity extends AppCompatActivity {
 
         prog_timer = findViewById(R.id.prog_timer);
 
+
+
         tv_timer.setText("30 секунд");
         tv_questions.setText("");
         tv_botmessage.setText("Нажми Начать");
         tv_score.setText("0");
         prog_timer.setProgress(0);
+        List<Boolean> gameResults =DB.getAllGameResultsByEmail(email);
+
+        DB.updateUserGameProgress(email,gameResults.get(0),true,gameResults.get(2),gameResults.get(3),gameResults.get(4));
 
         View.OnClickListener startButtonClickListener = new View.OnClickListener() {
             @Override
@@ -140,11 +144,13 @@ public class MathGameActivity extends AppCompatActivity {
 
         tv_botmessage.setText(g.getNumberCorrect() + "/" + (g.getTotalQuestions() - 1));
     }
-
     @Override
     public void onBackPressed() {
-       Intent intent = new Intent(this, MenuActivity.class);
-       startActivity(intent);
+        Intent intent = new Intent(this, MenuActivity.class);
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.get("email").toString();
+        intent.putExtra("email","" + email);
+        startActivity(intent);
         super.onBackPressed();
     }
 }

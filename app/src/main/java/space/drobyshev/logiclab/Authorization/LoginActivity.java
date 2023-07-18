@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Boolean checkUserEmail = DB.checkEmail(email);
 
                                 if (checkUserEmail == false) {
-                                    Boolean insert = DB.insertData(name, email, password);
+                                    Boolean insert = DB.insertData(name, email, password, false, false, false, false, false);
 
                                     if (insert == true) {
                                         Toast.makeText(LoginActivity.this, "Успешная регистрация", Toast.LENGTH_SHORT).show();

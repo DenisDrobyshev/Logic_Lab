@@ -1,5 +1,6 @@
 package space.drobyshev.logiclab.GamePlusMinus;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Bundle;
@@ -16,14 +17,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import java.util.List;
+
+import space.drobyshev.logiclab.DBHelper;
 import space.drobyshev.logiclab.GamePlusMinus.Game;
 import space.drobyshev.logiclab.GamePlusMinus.MyButton;
+import space.drobyshev.logiclab.MenuActivity;
 import space.drobyshev.logiclab.R;
 
 public class PlusMinusGameActivity extends AppCompatActivity
         implements Game.ResultsCallback, MyButton.MyOnClickListener {
 
     private static final int MATRIX_SIZE = 5;// можете ставить от 2 до 20))
+    DBHelper DB;
 
     //ui
     private TextView mUpText, mLowText;
@@ -36,6 +42,15 @@ public class PlusMinusGameActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_plusminus);
+
+        DB = new DBHelper(this);
+
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.get("email").toString();
+
+        List<Boolean> gameResults =DB.getAllGameResultsByEmail(email);
+
+        DB.updateUserGameProgress(email,gameResults.get(0), gameResults.get(1),true,gameResults.get(3),gameResults.get(4));
 
         mGridLayout = (GridLayout) findViewById(R.id.my_grid);
         mGridLayout.setColumnCount(MATRIX_SIZE);
@@ -198,5 +213,15 @@ public class PlusMinusGameActivity extends AppCompatActivity
                 currentBut.setAlpha(0);
             }
         }, 800);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MenuActivity.class);
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.get("email").toString();
+        intent.putExtra("email","" + email);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

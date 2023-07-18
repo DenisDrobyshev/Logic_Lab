@@ -53,8 +53,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/ic_check_24" />
+                app:srcCompat="@drawable/ic_check_24"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <LinearLayout
@@ -74,8 +74,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/ic_check_24" />
+                app:srcCompat="@drawable/ic_check_24"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <LinearLayout
@@ -93,10 +93,10 @@
             <ImageView
                 android:id="@+id/complete_game3"
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/ic_check_24" />
+                app:srcCompat="@drawable/ic_check_24"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <LinearLayout
@@ -116,8 +116,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/ic_check_24" />
+                app:srcCompat="@drawable/ic_check_24"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <LinearLayout
@@ -137,8 +137,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                app:srcCompat="@drawable/ic_check_24" />
+                app:srcCompat="@drawable/ic_check_24"
+                android:visibility="invisible"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
