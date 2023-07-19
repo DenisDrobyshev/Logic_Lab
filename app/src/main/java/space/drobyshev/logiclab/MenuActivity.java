@@ -133,4 +133,15 @@ public class MenuActivity extends AppCompatActivity {
         intent.putExtra("email","" + email);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        Bundle bundle = getIntent().getExtras();
+        String email = bundle.get("email").toString();
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("email","" + email);
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
 }

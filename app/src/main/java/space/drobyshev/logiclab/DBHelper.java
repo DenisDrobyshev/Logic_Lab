@@ -1,5 +1,6 @@
 package space.drobyshev.logiclab;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -15,6 +16,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DBNAME = "Login.db";
     public static final String USERS_TABLE = "users";
     public static final String USER_DATA_TABLE = "user_data";
+
+
 
     public DBHelper(Context context) {
         super(context, "Login.db", null, 2);
@@ -88,6 +91,22 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
     }
 
+    @SuppressLint("Range")
+    public String getNameByEmail(String email) {
+        SQLiteDatabase db = getReadableDatabase();
+        String name = null;
+
+        // Запрос для выборки имени по электронной почте
+        String query = "SELECT name FROM " + USERS_TABLE + " WHERE email = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{email});
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(cursor.getColumnIndex("name"));
+        }
+        cursor.close();
+
+        return name;
+    }
+
     public  List<Boolean> getAllGameResultsByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Boolean> gameResults = new ArrayList<>();
@@ -129,5 +148,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return gameResults;
     }
+
 
 }

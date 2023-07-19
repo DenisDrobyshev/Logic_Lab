@@ -3,7 +3,7 @@ package space.drobyshev.logiclab.GameMath;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MathGame {
+public class  MathGame {
     private List<Question> questions;
     private int numberCorrect;
     private int numberIncorrect;

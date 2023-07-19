@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         person_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAccountActivity();
+                openAccountActivity(email);
             }
         });
 
@@ -42,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void openAccountActivity() {
+    public void openAccountActivity(String email) {
         Intent intent = new Intent(this, AccountActivity.class);
+        intent.putExtra("email","" + email);
         startActivity(intent);
     }
 
@@ -57,4 +58,8 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("email","" + email);
         startActivity(intent);
     }
+
+
+
+
 }

@@ -33,8 +33,7 @@
         <activity
             android:name=".AccountActivity"
             android:exported="true"
-            android:label="Личный кабинет"
-            android:parentActivityName=".MainActivity" />
+            android:label="Личный кабинет" />
 
         <activity
             android:name=".GameMemory.MemoryGame"

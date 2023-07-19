@@ -19,13 +19,25 @@
         app:srcCompat="@drawable/ic_person" />
 
     <TextView
+        android:id="@+id/UserEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="email"
+        android:textSize="30sp"
+        android:textColor="@color/purple_700"
+        app:layout_constraintTop_toBottomOf="@id/user_name"
+        app:layout_constraintStart_toStartOf="@id/user_name"
+        app:layout_constraintEnd_toEndOf="@id/user_name"/>
+
+    <TextView
         android:id="@+id/user_name"
-        android:layout_width="133dp"
-        android:layout_height="43dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:hint="Your name"
-        android:textSize="20dp"
+        android:textSize="40sp"
+        android:textColor="@color/purple_700"
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,40 +45,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ic_main_personal"
         app:layout_constraintVertical_bias="0.125" />
-
-    <EditText
-        android:id="@+id/input_date_of_birth"
-        android:layout_width="238dp"
-        android:layout_height="46dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="10dp"
-        android:background="@drawable/edittext_border"
-        android:hint="Input your date of birth"
-        android:gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/input_your_email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_name" />
-
-    <EditText
-        android:id="@+id/input_your_email"
-        android:layout_width="188dp"
-        android:layout_height="37dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/edittext_border"
-        android:ems="10"
-        android:hint="Input your e-mail"
-        android:gravity="center"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
     <RelativeLayout
         android:id="@+id/linearLayout"
