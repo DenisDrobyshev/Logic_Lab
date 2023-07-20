@@ -15,12 +15,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DBNAME = "Login.db";
     public static final String USERS_TABLE = "users";
-    public static final String USER_DATA_TABLE = "user_data";
-
 
 
     public DBHelper(Context context) {
-        super(context, "Login.db", null, 2);
+        super(context, DBNAME, null, 2);
     }
 
     @Override
